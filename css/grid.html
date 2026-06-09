@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grids</title>
+    <style>
+        #main{
+            width:100%;
+            padding:0px;
+            margin:0px;
+        }
+        h1{
+            color:green;
+            font-size:50px;
+        }
+        .grid-boxes{
+            padding:2px;
+            background-color: rgb(21, 115, 115);
+            height:100px;
+            background-image: url(https://static.vecteezy.com/system/resources/thumbnails/057/068/323/small/single-fresh-red-strawberry-on-table-green-background-food-fruit-sweet-macro-juicy-plant-image-photo.jpg);
+        }
+        @media(max-width:400px){
+            .grid-box{
+                display:grid;
+                grid-template-columns:repeat(1,1fr); 
+                gap:10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <h1>Grids</h1>
+        <div class="grid-box">
+            <div class="grid-boxes">1</div>
+            <div class="grid-boxes">2</div>
+            <div class="grid-boxes">3</div>
+            <div class="grid-boxes">4</div>
+            <div class="grid-boxes">5</div>
+            <div class="grid-boxes">6</div>
+            <div class="grid-boxes">7</div>
+            <div class="grid-boxes">8</div>
+            <div class="grid-boxes">9</div>
+            <div class="grid-boxes">10</div>
+        </div>
+    </div>
+</body>
+</html>
