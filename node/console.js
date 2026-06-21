@@ -1,0 +1,6 @@
+console.log("A")
+console.table(["hello","morning"])
+console.error("Imcbgj")
+console.info("Important")
+console.warn("Move quickly")
+console.timeStamp(Date())

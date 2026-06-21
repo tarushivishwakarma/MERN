@@ -9,21 +9,34 @@ import Input from './Hooks/Input'
 import Useref from './Hooks/Useref'
 import Usereftimer from './Hooks/Usereftimer'
 import Prev from './Hooks/Prev'
+import {BrowserRouter,Route,Routes} from 'react-router-dom'
+import Home from './Hooks/Home'
+import Portfolio from './Hooks/Portfolio'
+import Callback from './Hooks/Callback'
 
 
 function App() {
   return (
     <>
-     {/* <Tarushi/>
+     <Tarushi/>
      <Teacher/>
      <UseState/>
      <Password/>
      <Forms/>
      <UseEffect/>
      <Input/>
-     <Useref/> */}
-     <Usereftimer/>
-     <Prev/>
+     <Useref/> 
+     
+      <BrowserRouter>
+        <Routes>
+          <Route path='/prev' element={<Prev/>}/>
+          <Route path='/timer' element={<Usereftimer/>}/>
+          <Route path='/home' element={<Home/>}/> 
+         <Route path='/portfolio' element={<Portfolio/>}/>
+         <Route path='/callback' element={<Callback/>}/>
+        </Routes>
+     </BrowserRouter> 
+     <Portfolio/>
     </>
   )
 }
