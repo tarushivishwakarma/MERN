@@ -1,11 +1,14 @@
+const jwt= require('jsonwebtoken')
 const verifyToken=(req,res,next)=>{
-    const token=req.headers.token
-    if(!token){
-        return res.status(401).json("Unauthorised")
+    const authheader=req.headers.authorization || req.headers.authorization
+    if(!authheader){
+        return res.status(401).json({message:"Unauthorised"})
     }
-    if(token!=="12345"){
-        return res.status(304).json("Wrong credentials")
+    const token=authheader.split(" ")[1]
+    try{
+        const payload=jwt.verify(token,SECRET)
+    }catch(error){
+        return res.status(401).json({message:"Invalid token"})
     }
-    next()
 }
 module.exports={verifyToken}

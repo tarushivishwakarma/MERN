@@ -1,24 +1,34 @@
 const Tarushi=require('../models/userModel')
+const jwt=require('jsonwebtoken')
 const login=async(req,res)=>{
     const {email,password}=req.body
+    SECRET="Tarushihehe"
     if(!email || !password){
-        return res.status(404).json("Fill all details")
+        return res.status(404).json({message:"Fill both details"})
     }
     try{
-        const user=await Tarushi.findOne({email})
-        if(user){
-            res.status(200).json("Login successful")
-        }else{
-            res.status(404).json("User not found.Kindly register")
+        const user=await Tarushi.findOne({email,password})
+        const token=jwt.sign({email:user.email, _id:user._id},SECRET,{expiresIn:'10m'})
+        if(!email){
+            res.status(404).json({message:"User not found.Kindly register"})
+        }
+        else if(user.role==="Management"){
+            res.status(200).json({message:"Management Login successful",user,token})
+        }
+        else if(user.role==="Teacher"){
+            res.status(200).json({message:"Teacher Login successful",user,token})
+        }
+        else{
+            res.status(200).json({message:"Login successful",user,token})
         }
     }catch(error){
         res.status(400).json(error)
     }
 }
-const addStudent=async(req,res)=>{
+const register=async(req,res)=>{
     try{
-        const student=await Tarushi.create(req.body)
-        res.status(201).json(student)
+        const addUser=await Tarushi.create(req.body)
+        res.status(201).json({message:"User added successfully"})
     }catch(error){
         res.status(400).json(error)
     }
@@ -34,7 +44,7 @@ const getStudent=async(req,res)=>{
 const getStudentbyid=async(req,res)=>{
     try{
         const student=await Tarushi.findById(req.params.studentId)
-        res.status(200).json(student)
+        res.status(200).json(`$`)
     }catch(error){
         res.status(400).json(error)
     }
@@ -59,4 +69,4 @@ const deleteStudent=async(req,res)=>{
         res.status(400).json(error)
     }
 }
-module.exports={login,getStudent,getStudentbyid,deleteStudent,updateStudent,addStudent}
+module.exports={login,getStudent,getStudentbyid,deleteStudent,updateStudent,register}
