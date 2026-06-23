@@ -5,6 +5,5 @@ const studentSchema=new mongoose.Schema({
         type:String,
         required:true
     }
-    
 })
 module.exports=mongoose.model("Students",studentSchema) 

@@ -1,5 +1,5 @@
 const verifyToken=(req,res,next)=>{
-    const token=req.headers.token || req.query.token
+    const token=req.headers.token
     if(!token){
         return res.status(401).json("Unauthorised")
     }
@@ -8,5 +8,4 @@ const verifyToken=(req,res,next)=>{
     }
     next()
 }
-
 module.exports={verifyToken}
