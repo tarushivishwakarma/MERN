@@ -6,7 +6,9 @@ const Tarushi=require('./models/userModel')
 const app=express()
 app.use(express.json())
 const {verifyToken}=require('./middleware/authMiddleware')
-const routes=require('./routes/userRoutes')
+const route=require('./routes/userRoutes')
+const routes=require('./routes/projectRoute')
+
 app.get("/work",(req,res)=>{
     fs.readFile('backend.txt','utf-8',(err,data)=>{
         if(err){
@@ -39,7 +41,10 @@ app.get("/profile",verifyToken,(req,res)=>{
 mongoose.connect('mongodb://localhost:27017')
 .then(()=>console.log("DB connected"))
 .catch((err)=>console.log(err))
+
+app.use("/api",route)
 app.use("/api",routes)
+
 app.listen(2211,()=>{
     console.log("Server started")
 })

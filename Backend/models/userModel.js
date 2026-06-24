@@ -1,5 +1,5 @@
 const mongoose=require('mongoose')
-const studentSchema=new mongoose.Schema({
+const userSchema=new mongoose.Schema({
     name:String,
     email:{
         type:String,
@@ -16,4 +16,15 @@ const studentSchema=new mongoose.Schema({
         required:true
     }
 },{timestamps:true})
-module.exports=mongoose.model("Students",studentSchema) 
+userSchema.pre("save",async function(next){
+    try{
+        if(!this.ismodified("password")){
+            return next()
+        }
+    }catch(error){
+        console.log(error)
+    }
+    this.password=await bcrypt.hash(this.password,10)
+    next()
+})
+module.exports=mongoose.model("User",userSchema) 

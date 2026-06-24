@@ -1,5 +1,6 @@
 const Tarushi=require('../models/userModel')
 const jwt=require('jsonwebtoken')
+const bcrypt = require('bcrypt')
 const login=async(req,res)=>{
     const {email,password}=req.body
     SECRET="Tarushihehe"
@@ -7,7 +8,11 @@ const login=async(req,res)=>{
         return res.status(404).json({message:"Fill both details"})
     }
     try{
-        const user=await Tarushi.findOne({email,password})
+        const user=await Tarushi.findOne({email})
+        const isMatch=await bcrypt.compare(req.body.password,user.password)
+        if(!isMatch){
+            return res.status(400).json({message:"Password mismatch"})
+        }
         const token=jwt.sign({email:user.email, _id:user._id},SECRET,{expiresIn:'10m'})
         if(!email){
             res.status(404).json({message:"User not found.Kindly register"})
