@@ -74,4 +74,13 @@ const deleteStudent=async(req,res)=>{
         res.status(400).json(error)
     }
 }
-module.exports={login,getStudent,getStudentbyid,deleteStudent,updateStudent,register}
+
+const uploadFiles=(upload.single("image"),async(req,res)=>{
+    try{
+        res.status(200).json("File uploaded")
+    }catch(error){
+        res.status(400).json(error)
+    }
+})
+
+module.exports={login,getStudent,getStudentbyid,deleteStudent,updateStudent,register,uploadFiles}

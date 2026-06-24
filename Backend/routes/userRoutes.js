@@ -1,10 +1,12 @@
 const route=require('express').Router()
-const{login,getStudent,getStudentbyid,deleteStudent,updateStudent,register}=require('../controllers/crudcontroller')
+const{login,getStudent,getStudentbyid,deleteStudent,updateStudent,register,uploadFiles}=require('../controllers/crudcontroller')
 const{verifyToken}=require('../middleware/authMiddleware')
+const {upload}=require('../files/files')
 route.post('/login',login)
 route.post("/register",register)
 route.get("/getDetails",verifyToken,getStudent)
 route.get("/getDetail/:studentId",getStudentbyid)
 route.put("/updateDetails/:id",updateStudent)
 route.delete("/deleteDetails",deleteStudent)
+route.post("/uploadFiles",uploadFiles)
 module.exports=route
