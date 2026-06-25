@@ -1,4 +1,5 @@
 const mongoose=require('mongoose')
+const bcrypt=require('bcrypt')
 const userSchema=new mongoose.Schema({
     name:String,
     email:{
@@ -18,7 +19,7 @@ const userSchema=new mongoose.Schema({
 },{timestamps:true})
 userSchema.pre("save",async function(next){
     try{
-        if(!this.ismodified("password")){
+        if(!this.isModified("password")){
             return next()
         }
     }catch(error){

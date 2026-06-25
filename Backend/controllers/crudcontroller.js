@@ -49,7 +49,7 @@ const getStudent=async(req,res)=>{
 const getStudentbyid=async(req,res)=>{
     try{
         const student=await Tarushi.findById(req.params.studentId)
-        res.status(200).json(`$`)
+        res.status(200).json(student)
     }catch(error){
         res.status(400).json(error)
     }
@@ -75,12 +75,12 @@ const deleteStudent=async(req,res)=>{
     }
 }
 
-const uploadFiles=(upload.single("image"),async(req,res)=>{
+const uploadFiles=async(req,res)=>{
     try{
         res.status(200).json("File uploaded")
     }catch(error){
         res.status(400).json(error)
     }
-})
+}
 
 module.exports={login,getStudent,getStudentbyid,deleteStudent,updateStudent,register,uploadFiles}

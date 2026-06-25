@@ -7,6 +7,6 @@ route.post("/register",register)
 route.get("/getDetails",verifyToken,getStudent)
 route.get("/getDetail/:studentId",getStudentbyid)
 route.put("/updateDetails/:id",updateStudent)
-route.delete("/deleteDetails",deleteStudent)
+route.delete("/deleteDetails/:id",deleteStudent)
 route.post("/uploadFiles",uploadFiles)
 module.exports=route
