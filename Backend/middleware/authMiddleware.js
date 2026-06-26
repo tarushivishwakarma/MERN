@@ -1,5 +1,5 @@
-const jwt= require('jsonwebtoken')
-SECRET="Tarushihehe"
+const jwt = require('jsonwebtoken')
+const SECRET = process.env.JWT_SECRET || 'Tarushihehe'
 const verifyToken=(req,res,next)=>{
     const authheader=req.headers.authorization || req.headers.authorization
     if(!authheader){

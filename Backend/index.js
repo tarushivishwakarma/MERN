@@ -4,47 +4,20 @@ const url=require('url')
 const mongoose=require('mongoose')
 const Tarushi=require('./models/userModel')
 const app=express()
+const cors=require('cors')
 app.use(express.json())
 const {verifyToken}=require('./middleware/authMiddleware')
 const route=require('./routes/userRoutes')
 const routes=require('./routes/projectRoute')
+app.use(express.json())
+app.use(cors())
 
-app.get("/work",(req,res)=>{
-    fs.readFile('backend.txt','utf-8',(err,data)=>{
-        if(err){
-            console.log(err)
-        }else{
-            res.send(data)
-        }
-    })
-})
-app.get("/student/:id",(req,res)=>{
-    res.send(`Student Id:${req.params.id}`)
-})
-app.get("/",(req,res)=>{
-    res.send("Home")
-})
-app.get("/about",(req,res)=>{
-    res.send("About")
-})
-app.get("/contact",(req,res)=>{
-    res.send("Contact")
-})
-app.get("/profile",verifyToken,(req,res)=>{
-    try{
-        const data="Bank details"
-        res.status(200).json(data)
-    }catch(error){
-        res.status(400).json(error)
-    }
-})
 mongoose.connect('mongodb://localhost:27017')
 .then(()=>console.log("DB connected"))
 .catch((err)=>console.log(err))
 
 app.use("/api",route)
 app.use("/api",routes)
-
-app.listen(2211,()=>{
+app.listen(5000,()=>{
     console.log("Server started")
 })

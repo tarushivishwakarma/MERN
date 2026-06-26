@@ -32,10 +32,21 @@ const login=async(req,res)=>{
 }
 const register=async(req,res)=>{
     try{
+        const {name, email, password, role} = req.body
+        
+        if(!name || !email || !password || !role){
+            return res.status(400).json({message:"Please fill all fields"})
+        }
+        
+        const existingUser = await Tarushi.findOne({email})
+        if(existingUser){
+            return res.status(400).json({message:"Email already registered"})
+        }
+        
         const addUser=await Tarushi.create(req.body)
         res.status(201).json({message:"User added successfully"})
     }catch(error){
-        res.status(400).json(error)
+        res.status(400).json({message: error.message || "Registration failed"})
     }
 }
 const getStudent=async(req,res)=>{
