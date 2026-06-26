@@ -59,7 +59,7 @@ const getStudent=async(req,res)=>{
 }
 const getStudentbyid=async(req,res)=>{
     try{
-        const student=await Tarushi.findById(req.params.studentId)
+        const student=await Tarushi.findById(req.params.id)
         res.status(200).json(student)
     }catch(error){
         res.status(400).json(error)
